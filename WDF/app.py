@@ -1,3 +1,5 @@
+from dummy_predictor import dummy_model
+import pandas as pd
 import streamlit as st
 
 def local_css(file_name):
@@ -15,5 +17,15 @@ local_css("./css/style.css")
 remote_css('https://fonts.googleapis.com/icon?family=Material+Icons')
 
 icon("memory")
-selected = st.text_input("", "Search...")
+df = pd.read_csv("../raw_data/df_metadata_merc_24Mars.csv")
+search_query = st.text_input("", "un jean bleu")
+df_res = dummy_model(df, str(search_query))
 button_clicked = st.button("OK")
+if st.checkbox('Show result', False):
+    st.write(df_res)
+
+
+# if __name__ == '__main__':
+#     df = pd.read_csv("../raw_data/df_metadata_merc_24Mars.csv")
+#     search_query = input('Que cherchez-vous ? (dummy model): \n')
+#     print(dummy_model(df, str(search_query)))
