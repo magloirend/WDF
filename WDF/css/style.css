@@ -7,8 +7,6 @@ body {
     color: #fff;
     background-color: #d9c5ab;
 }
-
-
 .stButton>button {
     color: #4F8BF9;
     border-radius: 50%;
@@ -17,6 +15,6 @@ body {
 }
 
 .stTextInput>div>div>input {
-    color: #4F8BF9;
+    color: #000;
 }
 
