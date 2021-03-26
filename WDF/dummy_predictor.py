@@ -21,7 +21,7 @@ def dummy_model(df, recherche_user):
         def count_words(x):
             return len(set(str(x).split()) & set(recherche_simplified.split()))
 
-        recommendation_df = df[['product_id', 'product_name', 'photos', 'price', 'brand_name']]
+        recommendation_df = df[['product_id', 'product_name','photos']]
         recommendation_df['best_fit'] = df.metadata.apply(count_words)
         return recommendation_df.sort_values(by='best_fit', ascending=False).reset_index().head(15)
 
@@ -30,6 +30,6 @@ def dummy_model(df, recherche_user):
 
 
 if __name__ == '__main__':
-    df = pd.read_csv("../raw_data/df_metadata_merc_24Mars.csv")
+    df = pd.read_csv("../raw_data/mag_test.csv")
     search_query = input('Que cherchez-vous ? (dummy model): \n')
     print(dummy_model(df, str(search_query)))
