@@ -32,3 +32,4 @@ termcolor
 streamlit
 nltk
 coverage
+nltk.txt

@@ -26,7 +26,6 @@ search_query = st.text_input("", "un jean bleu")
 df_res = dummy_model(df, str(search_query))
 df_res.drop_duplicates(subset='product_id',inplace=True)
 button_clicked = st.button("OK")
-# st.write(df_res)
 
 
 
@@ -54,9 +53,11 @@ def filter():
         return b.where(m).dropna()[['photos','product_name']].drop_duplicates()
     else:
         return None
-st.write(df_res)
-reco = filter().head(5)
 
+
+rec = reco = filter().head(5)
+
+st.write(rec)
 st.write('''
     ## les autres utilisateurs ont aussi commandees''')
 
