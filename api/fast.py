@@ -23,11 +23,12 @@ def index():
 
 @app.get("/matching_products/")
 def get_matching_products(query):
-	df = pd.read_csv('/home/victordedalus/code/magloirend/WDF/raw_data/final_df_victor.csv')
+	df = pd.read_csv('/home/victordedalus/code/magloirend/WDF/raw_data/final_df_2.csv')
 	answer = dummy_model(df, query)
 	if type(answer) == str:
 		return answer
 	else:
+		answer['user_id'] = answer['user_id'].fillna(0)
 		return answer.to_dict('index')
 
 if __name__ == '__main__':
