@@ -26,6 +26,8 @@ search_query = st.text_input("", "un jean bleu")
 df_res = dummy_model(df, str(search_query))
 df_res.drop_duplicates(subset='product_id',inplace=True)
 button_clicked = st.button("OK")
+# st.write(df_res)
+
 
 
 num =len(df_res)
@@ -33,6 +35,37 @@ if st.checkbox('Show result', False):
     for i in range(len(df_res)):
         st.image(df_res.iloc[i]['photos'],width=300,
                         caption=df_res.iloc[i]['product_name'])
+
+##############
+## dataframe user filtering #####
+##############
+
+prod_id = df_res.iloc[0]['product_id']
+user_id = df_res.iloc[0]['user_id']
+
+def filter():
+    df_rec =df
+    a = user_id
+    df[df_rec['product_id']==prod_id]
+    b =df_rec[df_rec['user_id']==a]
+    if len(b)!=1:
+        m = b['product_id']!= prod_id
+        b.where(m).dropna(inplace =True)
+        return b.where(m).dropna()[['photos','product_name']].drop_duplicates()
+    else:
+        return None
+st.write(df_res)
+reco = filter().head(5)
+
+st.write('''
+    ## les autres utilisateurs ont aussi commandees''')
+
+
+
+if st.checkbox('commandees par les autres users', False):
+    for i in range(len(reco)):
+        st.image(reco.iloc[i]['photos'],width=300,
+                        caption=reco.iloc[i]['product_name'])
 
 
 # if __name__ == '__main__':
