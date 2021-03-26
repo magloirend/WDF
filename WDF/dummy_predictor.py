@@ -23,8 +23,7 @@ def dummy_model(df, recherche_user):
 
         recommendation_df = df[['user_id','product_id', 'product_name','photos']]
         recommendation_df['best_fit'] = df.metadata.apply(count_words)
-        recommendation_df = recommendation_df.sort_values(by='best_fit', ascending=False)
-        return recommendation_df.head(15)
+        return recommendation_df.sort_values(by='best_fit', ascending=False).reset_index().head(15)
 
     except:
         return "No result, you must enter a text here."
