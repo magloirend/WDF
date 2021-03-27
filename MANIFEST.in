@@ -1,2 +1,2 @@
-include requirements.txt
-include nltk.txt
+requirements.txt
+nltk.txt
