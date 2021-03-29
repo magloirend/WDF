@@ -38,6 +38,7 @@ def get_matching_products(query):
 	# converting the vectorized_metadata column to the intended type
 	df.vectorized_metadata = df.vectorized_metadata.apply(from_str_to_ndarray)
 	answer = get_similarities(df, query)
+	answer.reset_index(inplace=True)
 	if type(answer) == str:
 		return answer
 	else:
