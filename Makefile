@@ -1,3 +1,15 @@
+#LOCAL_PATH = XXX
+
+#PROJECT_ID = wedressfair-309108
+
+#BUCKET_NAME = wedressfair-damienbusson
+
+#BUCKET_FOLDER = data
+
+#BUCKET_FILE_NAME=$(shell basename ${LOCAL_PATH})
+
+#REGION=europe-west1
+
 # ----------------------------------
 #          INSTALL & TEST
 # ----------------------------------
@@ -76,3 +88,22 @@ heroku_create_app:
 deploy_heroku:
 	-@git push heroku master
 	-@heroku ps:scale web=1
+
+# Job
+run_locally:
+	@python -m ${PACKAGE_NAME}.${FILENAME}
+
+gcp_submit_training:
+	gcloud ai-platform jobs submit training ${JOB_NAME} \
+	--job-dir gs://${BUCKET_NAME}/${BUCKET_TRAINING_FOLDER} \
+	--package-path ${PACKAGE_NAME} \
+	--module-name ${PACKAGE_NAME}.${FILENAME} \
+	--python-version=${PYTHON_VERSION} \
+	--runtime-version=${RUNTIME_VERSION} \
+	--region ${REGION} \
+	--stream-logs
+
+##### Prediction API - - - - - - - - - - - - - - - - - - - - - - - - -
+
+run_api:
+	uvicorn api.fast:app --reload  # load web server with code autoreload
