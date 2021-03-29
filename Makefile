@@ -1,3 +1,15 @@
+#LOCAL_PATH = XXX
+
+#PROJECT_ID = wedressfair-309108
+
+#BUCKET_NAME = wedressfair-damienbusson
+
+#BUCKET_FOLDER = data
+
+#BUCKET_FILE_NAME=$(shell basename ${LOCAL_PATH})
+
+#REGION=europe-west1
+
 # ----------------------------------
 #          INSTALL & TEST
 # ----------------------------------
@@ -90,3 +102,8 @@ gcp_submit_training:
 	--runtime-version=${RUNTIME_VERSION} \
 	--region ${REGION} \
 	--stream-logs
+
+##### Prediction API - - - - - - - - - - - - - - - - - - - - - - - - -
+
+run_api:
+	uvicorn api.fast:app --reload  # load web server with code autoreload
