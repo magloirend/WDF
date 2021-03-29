@@ -6,4 +6,4 @@ raw_data/
 **/__pycache__/
 .env
 .python-version
-WDF/NLP_model.py
+# WDF/NLP_model.py
