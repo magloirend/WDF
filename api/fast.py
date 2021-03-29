@@ -3,6 +3,7 @@ import pandas as pd
 import joblib
 import sys
 from os.path import join, dirname, realpath
+import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -16,6 +17,7 @@ from WDF.NLP_model import get_similarities
 
 
 app = FastAPI()
+code_path = os.getenv('CODEPATH')
 
 app.add_middleware(
     CORSMiddleware,
@@ -32,7 +34,7 @@ def index():
 @app.get("/matching_products/")
 def get_matching_products(query):
 	# loading final csv
-	df = pd.read_csv('/home/victordedalus/code/magloirend/WDF/raw_data/final_all_info_df.csv')
+	df = pd.read_csv(f'{code_path}/code/magloirend/WDF/raw_data/final_all_info_df.csv')
 	# converting the vectorized_metadata column to the intended type
 	df.vectorized_metadata = df.vectorized_metadata.apply(from_str_to_ndarray)
 	answer = get_similarities(df, query)
