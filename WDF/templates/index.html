@@ -15,6 +15,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='plugins/OwlCarousel2-2.2.1/animate.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main_styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/responsive.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}">
 </head>
 <body>
 
@@ -82,20 +83,20 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
       </nav>
       <div class="header_right d-flex flex-row align-items-center justify-content-start ml-auto">
         <!-- Search -->
-        <div class="header_search">
+<!--         <div class="header_search">
           <form method="POST" id="header_search_form">
             <input name="text" type ="submit" class="search_input" placeholder="Search Item" required="required">
             <button class="header_search_button"><img src="static/images/search.png" alt=""></button>
           </form>
-        </div>
+        </div> -->
         <!-- User -->
         <div class="user"><a href="#"><div><img src="static/images/user.svg" alt="https://www.flaticon.com/authors/freepik"><div>1</div></div></a></div>
         <!-- Cart -->
         <div class="cart"><a href="cart.html"><div><img class="svg" src="static/images/cart.svg" alt="https://www.flaticon.com/authors/freepik"></div></a></div>
         <!-- Phone -->
         <div class="header_phone d-flex flex-row align-items-center justify-content-start">
-          <div><div><img src="static/static/images/phone.svg" alt="https://www.flaticon.com/authors/freepik"></div></div>
-          <div>+1 912-252-7350</div>
+          <div><div></div></div>
+          <div><img src="static/assets/logo.svg"></div>
         </div>
       </div>
     </div>
@@ -121,18 +122,36 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                   <div class="home_container d-flex flex-column align-items-center justify-content-start">
                     <div class="home_content">
                       {%block content%}
+                      <style>
+                        .coupon_but {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 90px;
+    height: 44px;
+    background: #2fce98;
+    border-radius: 3px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+                      </style>
                       <form action="{{ url_for('my_form_post')}}" method="GET" >
-    <input name="text">
-    <input type="submit">
+    <input name="text" class="coupon_input">
+    <input type="submit" id="cool" class="coupon_but">
 </form>
 
-                      <div class="home_title">{{query}}</div>
+                      <div class="home_title">Quel est votre mood du jour?</div>
                       <div class="home_subtitle">Summer Wear</div>
                       <div class="home_items">
                         <div class="row">
                           <div class="col-sm-3 offset-lg-1">
 
-                            <div class="home_item_side"><a href="product.html"><img src="{{data[0]}}" alt=""></a></div>
+                            <div class="home_item_side"><a href="product.html"><img src="{{data[1]}}" alt=""></a></div>
 
 
                           </div>
@@ -141,11 +160,11 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                               <div class="product_tag d-flex flex-column align-items-center justify-content-center">
                                 <div>
                                   <div>from</div>
-                                  <div>$3<span>.99</span></div>
+                                  <div>€<span>{{price[0]}}</span></div>
                                 </div>
                               </div>
 
-                              <div class="product_image"><img src="{{data[1]}}" alt=""></div>
+                              <div class="product_image"><img src="{{data[0]}}" alt=""></div>
 
 
                               <div class="product_content">
@@ -158,7 +177,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                                   </div>
                                   <div class="ml-auto text-right">
                                     <div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                    <div class="product_price text-right">$3<span>.99</span></div>
+                                    <div class="product_price text-right">€<span>.99</span></div>
                                   </div>
                                 </div>
                                 <div class="product_buttons">
@@ -206,7 +225,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                               <div class="product_tag d-flex flex-column align-items-center justify-content-center">
                                 <div>
                                   <div>from</div>
-                                  <div>$3<span>.99</span></div>
+                                  <div>€<span>.99</span></div>
                                 </div>
                               </div>
                               <div class="product_image"><img src="static/images/product_1.jpg" alt=""></div>
@@ -220,7 +239,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                                   </div>
                                   <div class="ml-auto text-right">
                                     <div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                    <div class="product_price text-right">$3<span>.99</span></div>
+                                    <div class="product_price text-right">€<span>.99</span></div>
                                   </div>
                                 </div>
                                 <div class="product_buttons">
@@ -268,7 +287,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                               <div class="product_tag d-flex flex-column align-items-center justify-content-center">
                                 <div>
                                   <div>from</div>
-                                  <div>$3<span>.99</span></div>
+                                  <div>€<span>.99</span></div>
                                 </div>
                               </div>
                               <div class="product_image"><img src="static/images/product_2.jpg" alt=""></div>
@@ -282,7 +301,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                                   </div>
                                   <div class="ml-auto text-right">
                                     <div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                    <div class="product_price text-right">$3<span>.99</span></div>
+                                    <div class="product_price text-right">€<span>.99</span></div>
                                   </div>
                                 </div>
                                 <div class="product_buttons">
@@ -330,7 +349,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                               <div class="product_tag d-flex flex-column align-items-center justify-content-center">
                                 <div>
                                   <div>from</div>
-                                  <div>$3<span>.99</span></div>
+                                  <div>€<span>.99</span></div>
                                 </div>
                               </div>
                               <div class="product_image"><img src="static/images/product_3.jpg" alt=""></div>
@@ -344,7 +363,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                                   </div>
                                   <div class="ml-auto text-right">
                                     <div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                    <div class="product_price text-right">$3<span>.99</span></div>
+                                    <div class="product_price text-right">€<span>.99</span></div>
                                   </div>
                                 </div>
                                 <div class="product_buttons">
@@ -424,27 +443,27 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
           <!-- Product -->
           <div class="col-xl-4 col-md-6">
             <div class="product">
-              <div class="product_image"><img src="static/images/product_1.jpg" alt=""></div>
+              <div class="product_image"><img src="{{data_rec[0]}}" alt=""></div>
               <div class="product_content">
                 <div class="product_info d-flex flex-row align-items-start justify-content-start">
                   <div>
                     <div>
-                      <div class="product_name"><a href="product.html">Cool Clothing with Brown Stripes</a></div>
-                      <div class="product_category">In <a href="category.html">Category</a></div>
+                      <div class="product_name"><a href="product.html">{{name_rec[0]}}</a></div>
+                      <div class="product_category">Brand : <a href="https://www.wedressfair.fr/collections/{{slug_rec[0]}}">{{brand_rec[0]}}</a></div>
                     </div>
                   </div>
                   <div class="ml-auto text-right">
                     <div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                    <div class="product_price text-right">$3<span>.99</span></div>
+                    <div class="product_price text-right">€<span>{{price_rec[0]}}</span></div>
                   </div>
                 </div>
-                <div class="product_buttons">
+                <div class="product_buttons" >
                   <div class="text-right d-flex flex-row align-items-start justify-content-start">
                     <div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
                       <div><div><img src="static/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                     <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div ><div><a href="https://www.wedressfair.fr/collections/{{slug_rec[0]}}"><img src="static/images/cart.svg" class="svg" alt="" ></a><div>+</div></div></div>
                     </div>
                   </div>
                 </div>
@@ -455,18 +474,18 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
           <!-- Product -->
           <div class="col-xl-4 col-md-6">
             <div class="product">
-              <div class="product_image"><img src="static/images/product_2.jpg" alt=""></div>
+              <div class="product_image"><img src="{{data_rec[1]}}" alt=""></div>
               <div class="product_content">
                 <div class="product_info d-flex flex-row align-items-start justify-content-start">
                   <div>
                     <div>
-                      <div class="product_name"><a href="product.html">Cool Clothing with Brown Stripes</a></div>
-                      <div class="product_category">In <a href="category.html">Category</a></div>
+                      <div class="product_name"><a href="product.html">{{name_rec[1]}}</a></div>
+                      <div class="product_category">Brand : <a href="category.html">{{brand_rec[1]}}</a></div>
                     </div>
                   </div>
                   <div class="ml-auto text-right">
                     <div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                    <div class="product_price text-right">$3<span>.99</span></div>
+                    <div class="product_price text-right">€<span>{{price_rec[1]}}</span></div>
                   </div>
                 </div>
                 <div class="product_buttons">
@@ -475,7 +494,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                       <div><div><img src="static/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                     <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><a href="https://www.wedressfair.fr/collections/{{slug_rec[1]}}"></a><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                   </div>
                 </div>
@@ -486,18 +505,18 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
           <!-- Product -->
           <div class="col-xl-4 col-md-6">
             <div class="product">
-              <div class="product_image"><img src="static/images/product_3.jpg" alt=""></div>
+              <div class="product_image"><img src="{{data_rec[2]}}" alt=""></div>
               <div class="product_content">
                 <div class="product_info d-flex flex-row align-items-start justify-content-start">
                   <div>
                     <div>
-                      <div class="product_name"><a href="product.html">Cool Clothing with Brown Stripes</a></div>
-                      <div class="product_category">In <a href="category.html">Category</a></div>
+                      <div class="product_name"><a href="product.html">{{name_rec[2]}}</a></div>
+                      <div class="product_category">Brand : <a href="category.html">{{brand_rec[2]}}</a></div>
                     </div>
                   </div>
                   <div class="ml-auto text-right">
                     <div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                    <div class="product_price text-right">$3<span>.99</span></div>
+                    <div class="product_price text-right">€<span>{{price_rec[2]}}</span></div>
                   </div>
                 </div>
                 <div class="product_buttons">
@@ -506,7 +525,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                       <div><div><img src="static/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                     <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><a href="https://www.wedressfair.fr/collections/{{slug_rec[2]}}"></a><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                   </div>
                 </div>
@@ -517,18 +536,18 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
           <!-- Product -->
           <div class="col-xl-4 col-md-6">
             <div class="product">
-              <div class="product_image"><img src="static/images/product_4.jpg" alt=""></div>
+              <div class="product_image"><img src="{{data_rec[3]}}" alt=""></div>
               <div class="product_content">
                 <div class="product_info d-flex flex-row align-items-start justify-content-start">
                   <div>
                     <div>
-                      <div class="product_name"><a href="product.html">Cool Clothing with Brown Stripes</a></div>
-                      <div class="product_category">In <a href="category.html">Category</a></div>
+                      <div class="product_name"><a href="product.html">{{name_rec[3]}}</a></div>
+                      <div class="product_category">Brand : <a href="category.html">{{brand_rec[3]}}</a></div>
                     </div>
                   </div>
                   <div class="ml-auto text-right">
                     <div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                    <div class="product_price text-right">$3<span>.99</span></div>
+                    <div class="product_price text-right">€<span>{{price_rec[3]}}</span></div>
                   </div>
                 </div>
                 <div class="product_buttons">
@@ -537,7 +556,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                       <div><div><img src="static/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                     <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><a href="https://www.wedressfair.fr/collections/{{slug_rec[3]}}"></a><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                   </div>
                 </div>
@@ -548,18 +567,18 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
           <!-- Product -->
           <div class="col-xl-4 col-md-6">
             <div class="product">
-              <div class="product_image"><img src="static/images/product_5.jpg" alt=""></div>
+              <div class="product_image"><img src="{{data_rec[4]}}" alt=""></div>
               <div class="product_content">
                 <div class="product_info d-flex flex-row align-items-start justify-content-start">
                   <div>
                     <div>
-                      <div class="product_name"><a href="product.html">Cool Clothing with Brown Stripes</a></div>
-                      <div class="product_category">In <a href="category.html">Category</a></div>
+                      <div class="product_name"><a href="product.html">{{name_rec[4]}}</a></div>
+                      <div class="product_category">Brand : <a href="category.html">{{brand_rec[4]}}</a></div>
                     </div>
                   </div>
                   <div class="ml-auto text-right">
                     <div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                    <div class="product_price text-right">$3<span>.99</span></div>
+                    <div class="product_price text-right">€<span>{{price_rec[4]}}</span></div>
                   </div>
                 </div>
                 <div class="product_buttons">
@@ -568,7 +587,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                       <div><div><img src="static/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                     <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><a href="https://www.wedressfair.fr/collections/{{slug_rec[4]}}"></a><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                   </div>
                 </div>
@@ -579,18 +598,18 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
           <!-- Product -->
           <div class="col-xl-4 col-md-6">
             <div class="product">
-              <div class="product_image"><img src="static/images/product_6.jpg" alt=""></div>
+              <div class="product_image"><img src="{{data_rec[5]}}" alt=""></div>
               <div class="product_content">
                 <div class="product_info d-flex flex-row align-items-start justify-content-start">
                   <div>
                     <div>
-                      <div class="product_name"><a href="product.html">Cool Clothing with Brown Stripes</a></div>
-                      <div class="product_category">In <a href="category.html">Category</a></div>
+                      <div class="product_name"><a href="product.html">{{name_rec[5]}}</a></div>
+                      <div class="product_category">Brand :  <a href="category.html">{{brand_rec[5]}}</a></div>
                     </div>
                   </div>
                   <div class="ml-auto text-right">
                     <div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                    <div class="product_price text-right">$3<span>.99</span></div>
+                    <div class="product_price text-right">€<span>{{price_rec[5]}}</span></div>
                   </div>
                 </div>
                 <div class="product_buttons">
@@ -599,7 +618,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                       <div><div><img src="static/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                     <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><a href="https://www.wedressfair.fr/collections/{{slug_rec[5]}}"></a><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                   </div>
                 </div>
@@ -805,7 +824,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
             <div class="col">
               <div class="footer_bar_content d-flex flex-md-row flex-column align-items-center justify-content-start">
                 <div class="copyright order-md-1 order-2"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>. Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by Magloire Ndabagera, Damien Busson & Victor Lambert<a href="https://colorlib.com" target="_blank">M</a>. Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
                 <nav class="footer_nav ml-md-auto order-md-2 order-1">
                   <ul class="d-flex flex-row align-items-center justify-content-start">
@@ -841,3 +860,4 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="js/custom.js"></script>
 </body>
 </html>
+

@@ -1,0 +1,11 @@
+.coupon_input {
+    width: calc(100% - 120px);
+    height: 44px;
+    border: none;
+    background: #FFFFFF;
+    outline: none;
+    margin-right: 30px;
+    padding-left: 20px;
+}
+
+

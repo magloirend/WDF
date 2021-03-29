@@ -28,11 +28,11 @@ def get_vectorized_metadata():
 def get_model():
 
     model_path = os.path.join('model', 'glove_twitter_25_model.model')
+    # if not os.path.isfile(model_path):
+    #    model = gensim.downloader.load('glove-twitter-25')
+    #    model.save(model_path)
+    # else:
 
-#    if not os.path.isfile(model_path):
-#       model = gensim.downloader.load('glove-twitter-25')
-#       model.save(model_path)
-#    else:
     model = KeyedVectors.load(model_path)
 
     return model
@@ -90,7 +90,8 @@ def get_similarities(df, search_query):
     similarities_df.index = df['product_id']
     similarities_df.rename(columns={similarities_df.columns[0]: "similarities"}, inplace=True)
 
-    similarities_df = df[['product_id', 'product_name', 'photos', 'slug', 'price', 'brand_name']].merge(similarities_df, how='left', on='product_id')
+    similarities_df = df[['product_id', 'product_name', 'photos','price','brand_name']].merge(similarities_df, how='left', on='product_id')
+
     similarities_df.sort_values(by='similarities', ascending=False, inplace=True)
 
     return similarities_df.head(10)
