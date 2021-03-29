@@ -24,6 +24,7 @@ s3fs
 streamlit
 uvicorn
 fastapi
+gensim
 
 # utilities
 six>=1.14
