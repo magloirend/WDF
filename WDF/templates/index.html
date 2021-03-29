@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Little Closet</title>
+<title>We Dress Fair</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Little Closet template">
@@ -19,14 +19,13 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
 <body>
 
 <!-- Menu -->
-
 <div class="menu">
 
   <!-- Search -->
   <div class="menu_search">
     <form action="#" id="menu_search_form" class="menu_search_form">
       <input type="text" class="search_input" placeholder="Search Item" required="required">
-      <button class="menu_search_button"><img src="images/search.png" alt=""></button>
+      <button class="menu_search_button"><img src="static/images/search.png" alt=""></button>
     </form>
   </div>
   <!-- Navigation -->
@@ -42,7 +41,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
   <!-- Contact Info -->
   <div class="menu_contact">
     <div class="menu_phone d-flex flex-row align-items-center justify-content-start">
-      <div><div><img src="images/phone.svg" alt="https://www.flaticon.com/authors/freepik"></div></div>
+      <div><div><img src="static/images/phone.svg" alt="https://www.flaticon.com/authors/freepik"></div></div>
       <div>+1 912-252-7350</div>
     </div>
     <div class="menu_social">
@@ -66,8 +65,8 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
       <div class="logo">
         <a href="#">
           <div class="d-flex flex-row align-items-center justify-content-start">
-            <div><img src="images/logo_1.png" alt=""></div>
-            <div>Little Closet</div>
+            <div><img src="static/images/logo_1.png" alt=""></div>
+            <div>We Dress Fair</div>
           </div>
         </a>
       </div>
@@ -84,18 +83,18 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
       <div class="header_right d-flex flex-row align-items-center justify-content-start ml-auto">
         <!-- Search -->
         <div class="header_search">
-          <form action="#" id="header_search_form">
-            <input type="text" class="search_input" placeholder="Search Item" required="required">
-            <button class="header_search_button"><img src="images/search.png" alt=""></button>
+          <form method="POST" id="header_search_form">
+            <input name="text" type ="submit" class="search_input" placeholder="Search Item" required="required">
+            <button class="header_search_button"><img src="static/images/search.png" alt=""></button>
           </form>
         </div>
         <!-- User -->
-        <div class="user"><a href="#"><div><img src="images/user.svg" alt="https://www.flaticon.com/authors/freepik"><div>1</div></div></a></div>
+        <div class="user"><a href="#"><div><img src="static/images/user.svg" alt="https://www.flaticon.com/authors/freepik"><div>1</div></div></a></div>
         <!-- Cart -->
-        <div class="cart"><a href="cart.html"><div><img class="svg" src="images/cart.svg" alt="https://www.flaticon.com/authors/freepik"></div></a></div>
+        <div class="cart"><a href="cart.html"><div><img class="svg" src="static/images/cart.svg" alt="https://www.flaticon.com/authors/freepik"></div></a></div>
         <!-- Phone -->
         <div class="header_phone d-flex flex-row align-items-center justify-content-start">
-          <div><div><img src="images/phone.svg" alt="https://www.flaticon.com/authors/freepik"></div></div>
+          <div><div><img src="static/static/images/phone.svg" alt="https://www.flaticon.com/authors/freepik"></div></div>
           <div>+1 912-252-7350</div>
         </div>
       </div>
@@ -109,23 +108,33 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
 
     <div class="home">
       <!-- Home Slider -->
-      <div class="home_slider_container">
+<!--       <div class="home_slider_container">
         <div class="owl-carousel owl-theme home_slider">
+ -->
 
           <!-- Slide -->
           <div class="owl-item">
-            <div class="background_image" style="background-image:url(images/home.jpg)"></div>
+            <div class="background_image" style="background-image:url(static/images/home.jpg)"></div>
             <div class="container fill_height">
               <div class="row fill_height">
                 <div class="col fill_height">
                   <div class="home_container d-flex flex-column align-items-center justify-content-start">
                     <div class="home_content">
-                      <div class="home_title">New Arrivals</div>
+                      {%block content%}
+                      <form action="{{ url_for('my_form_post')}}" method="GET" >
+    <input name="text">
+    <input type="submit">
+</form>
+
+                      <div class="home_title">{{query}}</div>
                       <div class="home_subtitle">Summer Wear</div>
                       <div class="home_items">
                         <div class="row">
                           <div class="col-sm-3 offset-lg-1">
-                            <div class="home_item_side"><a href="product.html"><img src="images/home_1.jpg" alt=""></a></div>
+
+                            <div class="home_item_side"><a href="product.html"><img src="{{data[0]}}" alt=""></a></div>
+
+
                           </div>
                           <div class="col-lg-4 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
                             <div class="product home_item_large">
@@ -135,7 +144,10 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                                   <div>$3<span>.99</span></div>
                                 </div>
                               </div>
-                              <div class="product_image"><img src="images/home_2.jpg" alt=""></div>
+
+                              <div class="product_image"><img src="{{data[1]}}" alt=""></div>
+
+
                               <div class="product_content">
                                 <div class="product_info d-flex flex-row align-items-start justify-content-start">
                                   <div>
@@ -152,10 +164,10 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                                 <div class="product_buttons">
                                   <div class="text-right d-flex flex-row align-items-start justify-content-start">
                                     <div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-                                      <div><div><img src="images/heart.svg" alt=""><div>+</div></div></div>
+                                      <div><div><img src="static/images/heart.svg" alt=""><div>+</div></div></div>
                                     </div>
                                     <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                                      <div><div><img src="images/cart_2.svg" alt=""><div>+</div></div></div>
+                                      <div><div><img src="static/images/cart_2.svg" alt=""><div>+</div></div></div>
                                     </div>
                                   </div>
                                 </div>
@@ -163,7 +175,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                             </div>
                           </div>
                           <div class="col-sm-3">
-                            <div class="home_item_side"><a href="product.html"><img src="images/home_3.jpg" alt=""></a></div>
+                            <div class="home_item_side"><a href="product.html"><img src="{{data[2]}}" alt=""></a></div>
                           </div>
                         </div>
                       </div>
@@ -176,7 +188,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
 
           <!-- Slide -->
           <div class="owl-item">
-            <div class="background_image" style="background-image:url(images/home.jpg)"></div>
+            <div class="background_image" style="background-image:url(static/images/home.jpg)"></div>
             <div class="container fill_height">
               <div class="row fill_height">
                 <div class="col fill_height">
@@ -187,7 +199,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                       <div class="home_items">
                         <div class="row">
                           <div class="col-sm-3 offset-lg-1">
-                            <div class="home_item_side"><a href="product.html"><img src="images/home_1.jpg" alt=""></a></div>
+                            <div class="home_item_side"><a href="product.html"><img src="static/images/home_1.jpg" alt=""></a></div>
                           </div>
                           <div class="col-lg-4 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
                             <div class="product home_item_large">
@@ -197,7 +209,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                                   <div>$3<span>.99</span></div>
                                 </div>
                               </div>
-                              <div class="product_image"><img src="images/product_1.jpg" alt=""></div>
+                              <div class="product_image"><img src="static/images/product_1.jpg" alt=""></div>
                               <div class="product_content">
                                 <div class="product_info d-flex flex-row align-items-start justify-content-start">
                                   <div>
@@ -214,10 +226,10 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                                 <div class="product_buttons">
                                   <div class="text-right d-flex flex-row align-items-start justify-content-start">
                                     <div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-                                      <div><div><img src="images/heart.svg" alt=""><div>+</div></div></div>
+                                      <div><div><img src="static/images/heart.svg" alt=""><div>+</div></div></div>
                                     </div>
                                     <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                                      <div><div><img src="images/cart_2.svg" alt=""><div>+</div></div></div>
+                                      <div><div><img src="static/images/cart_2.svg" alt=""><div>+</div></div></div>
                                     </div>
                                   </div>
                                 </div>
@@ -225,7 +237,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                             </div>
                           </div>
                           <div class="col-sm-3">
-                            <div class="home_item_side"><a href="product.html"><img src="images/home_3.jpg" alt=""></a></div>
+                            <div class="home_item_side"><a href="product.html"><img src="static/images/home_3.jpg" alt=""></a></div>
                           </div>
                         </div>
                       </div>
@@ -238,7 +250,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
 
           <!-- Slide -->
           <div class="owl-item">
-            <div class="background_image" style="background-image:url(images/home.jpg)"></div>
+            <div class="background_image" style="background-image:url(static/images/home.jpg)"></div>
             <div class="container fill_height">
               <div class="row fill_height">
                 <div class="col fill_height">
@@ -249,7 +261,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                       <div class="home_items">
                         <div class="row">
                           <div class="col-sm-3 offset-lg-1">
-                            <div class="home_item_side"><a href="product.html"><img src="images/home_1.jpg" alt=""></a></div>
+                            <div class="home_item_side"><a href="product.html"><img src="static/images/home_1.jpg" alt=""></a></div>
                           </div>
                           <div class="col-lg-4 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
                             <div class="product home_item_large">
@@ -259,7 +271,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                                   <div>$3<span>.99</span></div>
                                 </div>
                               </div>
-                              <div class="product_image"><img src="images/product_2.jpg" alt=""></div>
+                              <div class="product_image"><img src="static/images/product_2.jpg" alt=""></div>
                               <div class="product_content">
                                 <div class="product_info d-flex flex-row align-items-start justify-content-start">
                                   <div>
@@ -276,10 +288,10 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                                 <div class="product_buttons">
                                   <div class="text-right d-flex flex-row align-items-start justify-content-start">
                                     <div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-                                      <div><div><img src="images/heart.svg" alt=""><div>+</div></div></div>
+                                      <div><div><img src="static/images/heart.svg" alt=""><div>+</div></div></div>
                                     </div>
                                     <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                                      <div><div><img src="images/cart_2.svg" alt=""><div>+</div></div></div>
+                                      <div><div><img src="static/images/cart_2.svg" alt=""><div>+</div></div></div>
                                     </div>
                                   </div>
                                 </div>
@@ -287,7 +299,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                             </div>
                           </div>
                           <div class="col-sm-3">
-                            <div class="home_item_side"><a href="product.html"><img src="images/home_3.jpg" alt=""></a></div>
+                            <div class="home_item_side"><a href="product.html"><img src="static/images/home_3.jpg" alt=""></a></div>
                           </div>
                         </div>
                       </div>
@@ -300,7 +312,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
 
           <!-- Slide -->
           <div class="owl-item">
-            <div class="background_image" style="background-image:url(images/home.jpg)"></div>
+            <div class="background_image" style="background-image:url(static/images/home.jpg)"></div>
             <div class="container fill_height">
               <div class="row fill_height">
                 <div class="col fill_height">
@@ -311,7 +323,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                       <div class="home_items">
                         <div class="row">
                           <div class="col-sm-3 offset-lg-1">
-                            <div class="home_item_side"><a href="product.html"><img src="images/home_1.jpg" alt=""></a></div>
+                            <div class="home_item_side"><a href="product.html"><img src="static/images/home_1.jpg" alt=""></a></div>
                           </div>
                           <div class="col-lg-4 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
                             <div class="product home_item_large">
@@ -321,7 +333,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                                   <div>$3<span>.99</span></div>
                                 </div>
                               </div>
-                              <div class="product_image"><img src="images/product_3.jpg" alt=""></div>
+                              <div class="product_image"><img src="static/images/product_3.jpg" alt=""></div>
                               <div class="product_content">
                                 <div class="product_info d-flex flex-row align-items-start justify-content-start">
                                   <div>
@@ -338,10 +350,10 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                                 <div class="product_buttons">
                                   <div class="text-right d-flex flex-row align-items-start justify-content-start">
                                     <div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-                                      <div><div><img src="images/heart.svg" alt=""><div>+</div></div></div>
+                                      <div><div><img src="static/images/heart.svg" alt=""><div>+</div></div></div>
                                     </div>
                                     <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                                      <div><div><img src="images/cart_2.svg" alt=""><div>+</div></div></div>
+                                      <div><div><img src="static/images/cart_2.svg" alt=""><div>+</div></div></div>
                                     </div>
                                   </div>
                                 </div>
@@ -349,7 +361,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                             </div>
                           </div>
                           <div class="col-sm-3">
-                            <div class="home_item_side"><a href="product.html"><img src="images/home_3.jpg" alt=""></a></div>
+                            <div class="home_item_side"><a href="product.html"><img src="static/images/home_3.jpg" alt=""></a></div>
                           </div>
                         </div>
                       </div>
@@ -392,7 +404,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
       <div class="container">
         <div class="row">
           <div class="col-lg-6 offset-lg-3">
-            <div class="section_title text-center">Popular on Little Closet</div>
+            <div class="section_title text-center">Produits Similaires</div>
           </div>
         </div>
         <div class="row page_nav_row">
@@ -412,7 +424,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
           <!-- Product -->
           <div class="col-xl-4 col-md-6">
             <div class="product">
-              <div class="product_image"><img src="images/product_1.jpg" alt=""></div>
+              <div class="product_image"><img src="static/images/product_1.jpg" alt=""></div>
               <div class="product_content">
                 <div class="product_info d-flex flex-row align-items-start justify-content-start">
                   <div>
@@ -429,10 +441,10 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                 <div class="product_buttons">
                   <div class="text-right d-flex flex-row align-items-start justify-content-start">
                     <div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><img src="static/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                     <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="images/cart.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                   </div>
                 </div>
@@ -443,7 +455,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
           <!-- Product -->
           <div class="col-xl-4 col-md-6">
             <div class="product">
-              <div class="product_image"><img src="images/product_2.jpg" alt=""></div>
+              <div class="product_image"><img src="static/images/product_2.jpg" alt=""></div>
               <div class="product_content">
                 <div class="product_info d-flex flex-row align-items-start justify-content-start">
                   <div>
@@ -460,10 +472,10 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                 <div class="product_buttons">
                   <div class="text-right d-flex flex-row align-items-start justify-content-start">
                     <div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><img src="static/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                     <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="images/cart.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                   </div>
                 </div>
@@ -474,7 +486,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
           <!-- Product -->
           <div class="col-xl-4 col-md-6">
             <div class="product">
-              <div class="product_image"><img src="images/product_3.jpg" alt=""></div>
+              <div class="product_image"><img src="static/images/product_3.jpg" alt=""></div>
               <div class="product_content">
                 <div class="product_info d-flex flex-row align-items-start justify-content-start">
                   <div>
@@ -491,10 +503,10 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                 <div class="product_buttons">
                   <div class="text-right d-flex flex-row align-items-start justify-content-start">
                     <div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><img src="static/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                     <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="images/cart.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                   </div>
                 </div>
@@ -505,7 +517,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
           <!-- Product -->
           <div class="col-xl-4 col-md-6">
             <div class="product">
-              <div class="product_image"><img src="images/product_4.jpg" alt=""></div>
+              <div class="product_image"><img src="static/images/product_4.jpg" alt=""></div>
               <div class="product_content">
                 <div class="product_info d-flex flex-row align-items-start justify-content-start">
                   <div>
@@ -522,10 +534,10 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                 <div class="product_buttons">
                   <div class="text-right d-flex flex-row align-items-start justify-content-start">
                     <div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><img src="static/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                     <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="images/cart.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                   </div>
                 </div>
@@ -536,7 +548,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
           <!-- Product -->
           <div class="col-xl-4 col-md-6">
             <div class="product">
-              <div class="product_image"><img src="images/product_5.jpg" alt=""></div>
+              <div class="product_image"><img src="static/images/product_5.jpg" alt=""></div>
               <div class="product_content">
                 <div class="product_info d-flex flex-row align-items-start justify-content-start">
                   <div>
@@ -553,10 +565,10 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                 <div class="product_buttons">
                   <div class="text-right d-flex flex-row align-items-start justify-content-start">
                     <div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><img src="static/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                     <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="images/cart.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                   </div>
                 </div>
@@ -567,7 +579,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
           <!-- Product -->
           <div class="col-xl-4 col-md-6">
             <div class="product">
-              <div class="product_image"><img src="images/product_6.jpg" alt=""></div>
+              <div class="product_image"><img src="static/images/product_6.jpg" alt=""></div>
               <div class="product_content">
                 <div class="product_info d-flex flex-row align-items-start justify-content-start">
                   <div>
@@ -584,10 +596,10 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                 <div class="product_buttons">
                   <div class="text-right d-flex flex-row align-items-start justify-content-start">
                     <div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><img src="static/images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                     <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-                      <div><div><img src="images/cart.svg" class="svg" alt=""><div>+</div></div></div>
+                      <div><div><img src="static/images/cart.svg" class="svg" alt=""><div>+</div></div></div>
                     </div>
                   </div>
                 </div>
@@ -614,12 +626,12 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
 
               <!-- Box -->
               <div class="box">
-                <div class="background_image" style="background-image:url(images/box_1.jpg)"></div>
+                <div class="background_image" style="background-image:url(static/images/box_1.jpg)"></div>
                 <div class="box_content d-flex flex-row align-items-center justify-content-start">
                   <div class="box_left">
                     <div class="box_image">
                       <a href="category.html">
-                        <div class="background_image" style="background-image:url(images/box_1_img.jpg)"></div>
+                        <div class="background_image" style="background-image:url(static/images/box_1_img.jpg)"></div>
                       </a>
                     </div>
                   </div>
@@ -631,12 +643,12 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
 
               <!-- Box -->
               <div class="box">
-                <div class="background_image" style="background-image:url(images/box_2.jpg)"></div>
+                <div class="background_image" style="background-image:url(static/images/box_2.jpg)"></div>
                 <div class="box_content d-flex flex-row align-items-center justify-content-start">
                   <div class="box_left">
                     <div class="box_image">
                       <a href="category.html">
-                        <div class="background_image" style="background-image:url(images/box_2_img.jpg)"></div>
+                        <div class="background_image" style="background-image:url(static/images/box_2_img.jpg)"></div>
                       </a>
                     </div>
                   </div>
@@ -648,12 +660,12 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
 
               <!-- Box -->
               <div class="box">
-                <div class="background_image" style="background-image:url(images/box_3.jpg)"></div>
+                <div class="background_image" style="background-image:url(static/images/box_3.jpg)"></div>
                 <div class="box_content d-flex flex-row align-items-center justify-content-start">
                   <div class="box_left">
                     <div class="box_image">
                       <a href="category.html">
-                        <div class="background_image" style="background-image:url(images/box_3_img.jpg)"></div>
+                        <div class="background_image" style="background-image:url(static/images/box_3_img.jpg)"></div>
                       </a>
                     </div>
                   </div>
@@ -679,7 +691,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
           <div class="col-lg-4 feature_col">
             <div class="feature d-flex flex-row align-items-start justify-content-start">
               <div class="feature_left">
-                <div class="feature_icon"><img src="images/icon_1.svg" alt=""></div>
+                <div class="feature_icon"><img src="static/images/icon_1.svg" alt=""></div>
               </div>
               <div class="feature_right d-flex flex-column align-items-start justify-content-center">
                 <div class="feature_title">Fast Secure Payments</div>
@@ -691,7 +703,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
           <div class="col-lg-4 feature_col">
             <div class="feature d-flex flex-row align-items-start justify-content-start">
               <div class="feature_left">
-                <div class="feature_icon ml-auto mr-auto"><img src="images/icon_2.svg" alt=""></div>
+                <div class="feature_icon ml-auto mr-auto"><img src="static/images/icon_2.svg" alt=""></div>
               </div>
               <div class="feature_right d-flex flex-column align-items-start justify-content-center">
                 <div class="feature_title">Premium Products</div>
@@ -703,7 +715,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
           <div class="col-lg-4 feature_col">
             <div class="feature d-flex flex-row align-items-start justify-content-start">
               <div class="feature_left">
-                <div class="feature_icon"><img src="images/icon_3.svg" alt=""></div>
+                <div class="feature_icon"><img src="static/images/icon_3.svg" alt=""></div>
               </div>
               <div class="feature_right d-flex flex-column align-items-start justify-content-center">
                 <div class="feature_title">Free Delivery</div>
@@ -728,7 +740,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                 <div class="footer_logo">
                   <a href="#">
                     <div class="d-flex flex-row align-items-center justify-content-start">
-                      <div class="footer_logo_icon"><img src="images/logo_2.png" alt=""></div>
+                      <div class="footer_logo_icon"><img src="static/images/logo_2.png" alt=""></div>
                       <div>Little Closet</div>
                     </div>
                   </a>
@@ -738,7 +750,7 @@ href="{{ url_for('static', filename='styles/responsive.css') }}"
                 </div>
               </div>
             </div>
-
+            {%endblock%}
             <!-- Footer Links -->
             <div class="col-lg-4 footer_col">
               <div class="footer_menu">
