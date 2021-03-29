@@ -3,7 +3,7 @@ import numpy as np
 from scipy import spatial
 from utils import from_str_to_ndarray
 import os
-from gensim.models import Word2Vec, KeyedVectors
+from gensim.models import KeyedVectors
 
 
 
@@ -14,7 +14,7 @@ def get_vectorized_metadata():
     csv_path_vect_data = os.path.join('..','raw_data')
 
     # reading the csv into a dataframe
-    df = pd.read_csv(os.path.join(csv_path_vect_data, 'products_metadata_vectorized_df.csv'))
+    df = pd.read_csv(os.path.join(csv_path_vect_data, 'final_all_info_df.csv'))
 
     # transforming the column "vectorized_metadata"
     df.vectorized_metadata = df.vectorized_metadata.apply(from_str_to_ndarray)
@@ -29,11 +29,11 @@ def get_model():
 
     model_path = os.path.join('..', 'model', 'glove_twitter_25_model.model')
 
-    if not os.path.isfile(model_path):
-       model = gensim.downloader.load('glove-twitter-25')
-       model.save(model_path)
-    else:
-       model = KeyedVectors.load(model_path)
+#    if not os.path.isfile(model_path):
+#       model = gensim.downloader.load('glove-twitter-25')
+#       model.save(model_path)
+#    else:
+    model = KeyedVectors.load(model_path)
 
     return model
 
@@ -90,7 +90,7 @@ def get_similarities(df, search_query):
     similarities_df.index = df['product_id']
     similarities_df.rename(columns={similarities_df.columns[0]: "similarities"}, inplace=True)
 
-    similarities_df = df[['product_id', 'product_name', 'photos']].merge(similarities_df, how='left', on='product_id')
+    similarities_df = df[['product_id', 'product_name', 'photos', 'slug', 'price', 'brand_name']].merge(similarities_df, how='left', on='product_id')
     similarities_df.sort_values(by='similarities', ascending=False, inplace=True)
 
     return similarities_df.head(10)
