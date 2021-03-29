@@ -23,6 +23,7 @@ mlflow
 s3fs
 streamlit
 uvicorn
+fastapi
 
 # utilities
 six>=1.14
@@ -32,3 +33,4 @@ termcolor
 streamlit
 nltk
 coverage
+gensim
