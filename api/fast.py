@@ -1,11 +1,19 @@
 
 import pandas as pd
 import joblib
+import sys
+from os.path import join, dirname, realpath
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+#parent_path = join('/home/victordedalus/code/magloirend/WDF/api', '..')  # répertoire parent du folder qu'on veut importer
+#sys.path.insert(0, parent_path)
+
 from WDF.dummy_predictor import dummy_model
+from WDF.utils import from_str_to_ndarray
+from WDF.NLP_model import get_similarities
+
 
 app = FastAPI()
 
@@ -23,8 +31,11 @@ def index():
 
 @app.get("/matching_products/")
 def get_matching_products(query):
-	df = pd.read_csv('/home/victordedalus/code/magloirend/WDF/raw_data/final_df_victor.csv')
-	answer = dummy_model(df, query)
+	# loading final csv
+	df = pd.read_csv('/home/victordedalus/code/magloirend/WDF/raw_data/final_all_info_df.csv')
+	# converting the vectorized_metadata column to the intended type
+	df.vectorized_metadata = df.vectorized_metadata.apply(from_str_to_ndarray)
+	answer = get_similarities(df, query)
 	if type(answer) == str:
 		return answer
 	else:

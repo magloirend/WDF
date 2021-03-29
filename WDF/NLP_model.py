@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from scipy import spatial
-from utils import from_str_to_ndarray
+from WDF.utils import from_str_to_ndarray
 import os
 from gensim.models import KeyedVectors
 
@@ -11,7 +11,7 @@ def get_vectorized_metadata():
     """getting the vectorized metadata dataframe"""
 
     # setting the csv_path to fetch the csv_file in the raw_data folder, inside the package WDF
-    csv_path_vect_data = os.path.join('..','raw_data')
+    csv_path_vect_data = os.path.join('raw_data')
 
     # reading the csv into a dataframe
     df = pd.read_csv(os.path.join(csv_path_vect_data, 'final_all_info_df.csv'))
@@ -27,7 +27,7 @@ def get_vectorized_metadata():
 
 def get_model():
 
-    model_path = os.path.join('..', 'model', 'glove_twitter_25_model.model')
+    model_path = os.path.join('model', 'glove_twitter_25_model.model')
 
 #    if not os.path.isfile(model_path):
 #       model = gensim.downloader.load('glove-twitter-25')
