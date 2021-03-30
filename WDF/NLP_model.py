@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from scipy import spatial
-from WDF.utils import from_str_to_ndarray
+from utils import *
 import os
 from gensim.models import KeyedVectors
 
@@ -25,6 +25,7 @@ def get_vectorized_metadata():
     return df
 
 
+
 def get_model():
 
     model_path = os.path.join('model', 'glove_twitter_25_model.model')
@@ -40,7 +41,14 @@ def get_model():
 
 
 def avg_sentence_vector(sentence, model, num_features):
-    """returns a vectorized vector (for the next search-query)"""
+    """ returns a vectorized vector (for the next search-query) """
+
+    # preprocessing of the sentence
+    sentence = sentence.lower()
+    sentence = rem_stopwords(sentence)
+    sentence = lemmatizing(sentence)
+    sentence = removing_punctuation(sentence)
+    sentence = rem_stopwords(sentence)
 
     # splitting the sentence into a list of words
     words = sentence.split()
@@ -51,7 +59,7 @@ def avg_sentence_vector(sentence, model, num_features):
     # instantiating a list of the words in the model trained
     index_to_key_set = set(model.index_to_key)
 
-    # instantiating n_words
+    # instantiating a word count
     n_words = 0
 
     # for each word in the sentence, adding the vectorized version of the word to the feature_vec
