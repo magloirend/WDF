@@ -4,6 +4,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import os
 from gensim.models import Word2Vec, KeyedVectors
+from google.cloud import storage
 
 
 def rem_stopwords(text):
@@ -37,7 +38,23 @@ def from_str_to_ndarray(string):
     string = string.replace('\n', '')
     ndarray = np.fromstring(string, sep=" ")
     return ndarray
+######################
+## GCP function #########
+######################
 
+def get_model_gcp():
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket('wdf_mag')
+    blob = bucket.blob('data/final_all_info_df.csv')
+    df = pd.read_csv('gs://wdf_mag/data/final_all_info_df.csv')
+    return df
+
+
+def get_model_vec_gcp():
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket('wedressfair-damienbusson')
+    blob = bucket.blob('model/glove_twitter_25_model.model')
+    return blob
 
 
 
@@ -50,10 +67,10 @@ def get_vectorized_metadata():
     """getting the vectorized metadata dataframe"""
 
     # setting the csv_path to fetch the csv_file in the raw_data folder, inside the package WDF
-    csv_path_vect_data = os.path.join('..','raw_data')
+    # csv_path_vect_data = os.path.join('..','raw_data')
 
     # reading the csv into a dataframe
-    df = pd.read_csv(os.path.join(csv_path_vect_data, 'final_all_info_df.csv'))
+    df = get_model_gcp()
 
     # transforming the column "vectorized_metadata"
     df.vectorized_metadata = df.vectorized_metadata.apply(from_str_to_ndarray)
@@ -67,13 +84,13 @@ def get_vectorized_metadata():
 
 def get_model():
 
-    model_path = os.path.join('..', 'model', 'glove_twitter_25_model.model')
+    # model_path = os.path.join('..', 'model', 'glove_twitter_25_model.model')
 
     # if not os.path.isfile(model_path):
     #    model = gensim.downloader.load('glove-twitter-25')
     #    model.save(model_path)
     # else:
-    model = KeyedVectors.load(model_path)
+    model = KeyedVectors.load_word2vec_format("gs://wdf_mag/model/glove_twitter_model_25.model",binary=True)
 
     return model
 

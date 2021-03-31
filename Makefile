@@ -1,14 +1,18 @@
 #LOCAL_PATH = XXX
 
-#PROJECT_ID = wedressfair-309108
+PROJECT_ID = wedressfair-309108
 
-#BUCKET_NAME = wedressfair-damienbusson
+BUCKET_NAME = wedressfair-damienbusson
 
 #BUCKET_FOLDER = data
 
 #BUCKET_FILE_NAME=$(shell basename ${LOCAL_PATH})
 
 #REGION=europe-west1
+
+PYTHON_VERSION=3.7
+FRAMEWORK=scikit-learn
+RUNTIME_VERSION=1.15
 
 # ----------------------------------
 #          INSTALL & TEST

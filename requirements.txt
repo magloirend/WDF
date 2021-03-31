@@ -33,3 +33,5 @@ streamlit
 nltk
 coverage
 gensim
+flask
+Flask-Executor
