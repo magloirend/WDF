@@ -14,13 +14,16 @@ def get_vectorized_metadata():
     csv_path_vect_data = os.path.join('raw_data')
 
     # reading the csv into a dataframe
-    df = pd.read_csv(os.path.join(csv_path_vect_data, 'final_all_info_df.csv'))
+    # initial df with dim 25
+    #df = pd.read_csv(os.path.join(csv_path_vect_data, 'final_all_info_df.csv'))
+    # df with dim 100
+    df = pd.read_csv(os.path.join(csv_path_vect_data, 'final_all_info_df_100.csv'))
 
     # transforming the column "vectorized_metadata"
-    df.vectorized_metadata = df.vectorized_metadata.apply(from_str_to_ndarray)
+    df.metadata_100 = df.metadata_100.apply(from_str_to_ndarray)
 
     # dropping the column "Unnamed: 0"
-    df.drop(columns="Unnamed: 0", inplace=True)
+    df.drop(columns=["Unnamed: 0", "Unnamed: 0.1"], inplace=True)
 
     return df
 
@@ -28,7 +31,11 @@ def get_vectorized_metadata():
 
 def get_model():
 
-    model_path = os.path.join('model', 'glove_twitter_25_model.model')
+    # Loading the 25-dim model
+    #model_path = os.path.join('model', 'glove_twitter_25_model.model')
+
+    # Loading the 100-dim model
+    model_path = os.path.join('model', 'glove_twitter_model_100.model')
     # if not os.path.isfile(model_path):
     #    model = gensim.downloader.load('glove-twitter-25')
     #    model.save(model_path)
@@ -45,10 +52,9 @@ def avg_sentence_vector(sentence, model, num_features):
 
     # preprocessing of the sentence
     sentence = sentence.lower()
-    sentence = rem_stopwords(sentence)
-    sentence = lemmatizing(sentence)
     sentence = removing_punctuation(sentence)
     sentence = rem_stopwords(sentence)
+    sentence = lemmatizing(sentence)
 
     # splitting the sentence into a list of words
     words = sentence.split()
@@ -76,8 +82,8 @@ def avg_sentence_vector(sentence, model, num_features):
 
 
 
-def get_similarities(df, search_query):
-    """returns a top-10 dataframe of the similarities between vectors"""
+def get_similarities_dim_25(df, search_query):
+    """ returns a top-10 dataframe of the similarities between vectors in dim 25"""
 
     # loading the model
     model = get_model()
@@ -106,8 +112,38 @@ def get_similarities(df, search_query):
 
 
 
+def get_similarities_dim_100(df, search_query):
+    """ returns a top-10 dataframe of the similarities between vectors in dim 100"""
+
+    # loading the model
+    model = get_model()
+
+    # vectorizing the search query
+    search_vector = avg_sentence_vector(search_query, model, num_features=100)
+
+
+    # creating a list with the similarities between the search_query vector and the vectors of the
+    # products' metadata
+    similarities = []
+    for vector in df.metadata_100:
+
+        sim = 1 - spatial.distance.cosine(search_vector, vector)
+        similarities.append(sim)
+
+    # creating the dataframe from this list and sorting in descending order (top 10)
+    similarities_df = pd.DataFrame(similarities)
+    similarities_df.index = df['product_id']
+    similarities_df.rename(columns={similarities_df.columns[0]: "similarities"}, inplace=True)
+
+    similarities_df = df[['product_id', 'product_name', 'photos']].merge(similarities_df, how='left', on='product_id')
+    similarities_df.sort_values(by='similarities', ascending=False, inplace=True)
+
+    return similarities_df.head(10)
+
+
 if __name__ == '__main__':
     df = get_vectorized_metadata()
 #    print(df.head())
     search_query = input('Que cherchez-vous ? (NLP_model): \n')
-    print(get_similarities(df, search_query))
+#    print(get_similarities(df, search_query))
+    print(get_similarities_dim_100(df, search_query))

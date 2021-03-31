@@ -23,11 +23,13 @@ def from_str_to_ndarray(string):
 ## NLP words preprocessing functions ##
 ### ### ### ### ### ### ### ### ### ###
 
-def removing_punctuation(text):
-    """ removing punctuation in a text """
-    for punctuation in string.punctuation:
-        text = text.replace(punctuation, '')
-    return text
+
+def lemmatizing(text):
+    """ lemmatizing a fench text """
+    nlp = spacy.load('fr_core_news_md')
+    doc = nlp(text)
+    liste = [token.lemma_ for token in doc]
+    return ' '.join(liste)
 
 
 def rem_stopwords(text):
@@ -38,9 +40,10 @@ def rem_stopwords(text):
     return ' '.join(liste)
 
 
-def lemmatizing(text):
-    """ lemmatizing a fench text """
-    nlp = spacy.load('fr_core_news_md')
-    doc = nlp(text)
-    liste = [token.lemma_ for token in doc]
-    return ' '.join(liste)
+def removing_punctuation(text):
+    """ removing punctuation in a text """
+    for punctuation in string.punctuation:
+        text = text.replace(punctuation, '')
+    return text
+
+

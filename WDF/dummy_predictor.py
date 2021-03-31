@@ -1,14 +1,7 @@
 import numpy as np
 import pandas as pd
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
+from utils import rem_stopwords
 
-
-def rem_stopwords(text):
-    stop_words = set(stopwords.words('french'))
-    word_tokens = word_tokenize(text)
-    liste = [w for w in word_tokens if not w in stop_words]
-    return ' '.join(liste)
 
 
 def dummy_model(df, recherche_user):
