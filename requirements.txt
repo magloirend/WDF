@@ -19,19 +19,19 @@ yapf
 # API
 gcsfs
 google-cloud-storage
-mlflow
 s3fs
 uvicorn
 fastapi
+spacy
+requests
 
 # utilities
 six>=1.14
 joblib
 memoized-property
 termcolor
-streamlit
-nltk
 coverage
 gensim
 flask
+Flask-JSON
 Flask-Executor
