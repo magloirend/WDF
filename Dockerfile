@@ -4,6 +4,7 @@ FROM python:3.8-slim-buster
 
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
+RUN python -m spacy download fr_core_news_md
 COPY . /WDF
 ENV GOOGLE_APPLICATION_CREDENTIALS=WeDressFair-2394be3dc776.json
 WORKDIR /WDF
