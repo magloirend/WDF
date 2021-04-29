@@ -1,74 +1,22 @@
-# Data analysis
-- Document here the project: WDF
-- Description: Project Description
-- Data Source:
-- Type of analysis:
+# We dress fair project
 
-Please document the project the better you can.
+https://www.wedressfair.fr/
 
-# Startup the project
+# The project
 
-The initial setup.
+After analyzing the data, even though sales have increased
+more than 75%. of customers only order one product.
 
-Create virtualenv and install the project:
-```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv ~/venv ; source ~/venv/bin/activate ;\
-    pip install pip -U; pip install -r requirements.txt
-```
+So we decided to build a recommendation system, but we didn't have enough feedback to create a content-based or collaborative algorithm.
 
-Unittest test:
-```bash
-make clean install test
-```
+We decided to take a different approach and use an intelligent search engine and natural language to recommend similar products to consumers.
 
-Check for WDF in gitlab.com/{group}.
-If your project is not set please add it:
+Everything was done in 2 weeks, you can try it at :
 
-- Create a new project on `gitlab.com/{group}/WDF`
-- Then populate it:
 
-```bash
-##   e.g. if group is "{group}" and project_name is "WDF"
-git remote add origin git@github.com:{group}/WDF.git
-git push -u origin master
-git push -u origin --tags
-```
+# API
 
-Functionnal test with a script:
+https://apiwdf-grg6s3f3sa-ew.a.run.app/docs#/default/get_matching_products_matching_products__get
 
-```bash
-cd
-mkdir tmp
-cd tmp
-WDF-run
-```
-
-# Install
-
-Go to `https://github.com/{group}/WDF` to see the project, manage issues,
-setup you ssh public key, ...
-
-Create a python3 virtualenv and activate it:
-
-```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv -ppython3 ~/venv ; source ~/venv/bin/activate
-```
-
-Clone the project and install it:
-
-```bash
-git clone git@github.com:{group}/WDF.git
-cd WDF
-pip install -r requirements.txt
-make clean install test                # install and test
-```
-Functionnal test with a script:
-
-```bash
-cd
-mkdir tmp
-cd tmp
-WDF-run
-```
+# APP
+https://wdffinalwebsite-grg6s3f3sa-ew.a.run.app/
