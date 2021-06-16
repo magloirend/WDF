@@ -15,39 +15,6 @@ executor = Executor(app)
 ## Flask #####
 ##############
 
-# @app.route('/')
-# def my_form():
-#     return render_template('index.html')
-
-# @app.route('/', methods=['GET','POST'])
-# def my_form_post():
-#     """first dataframe"""
-#     query = request.args.get("text")
-#     df = pd.read_csv("../raw_data/mag_test.csv")
-#     search_query = query
-#     df_res = dummy_model(df, str(search_query))
-#     df_res.drop_duplicates(subset='product_id',inplace=True)
-#     # df_list_photos = []
-#     # for i in range(len(df_res)):
-#     #     df_list_photos.append(df_res['photos'])
-
-#     """filtering dataframe"""
-#     prod_id = df_res.iloc[0]['product_id']
-#     user_id = df_res.iloc[0]['user_id']
-
-#     df_rec =pd.read_csv("../raw_data/mag_test.csv")
-#     a = user_id
-#     df[df_rec['product_id']==prod_id]
-#     b =df_rec[df_rec['user_id']==a]
-#     if len(b)!=1:
-#         m = b['product_id']!= prod_id
-#         b.where(m).dropna(inplace =True)
-#         b.where(m).dropna()[['photos','product_name']].drop_duplicates(inplace =True)
-#         b.reset_index(drop=True, inplace=True)
-#     #     return b.where(m).dropna()[['photos','product_name']].drop_duplicates()
-#     # else:
-#     #     return None
-#     return render_template('index.html', data=df_res['photos'],query=query,b=b['photos'])
 
 
 ##############
